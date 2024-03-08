@@ -42,11 +42,16 @@ Array.prototype.newFilter = function(logic) {
   return result
 }
 
-Array.prototype.newReduce = function(logic,acc= 0) { 
-  this.forEach((element) => {
-  	acc = logic(acc, element)
-  })
-  return acc
+Array.prototype.newReduce = function(logic,acc) { 
+  var accumulator = acc;
+  for (var i = 0; i < this.length; i++) {
+      if (accumulator !== undefined) {
+        accumulator = logic.call(undefined, accumulator, this[i],   i, this);
+      } else {
+        accumulator = this[i];
+      }
+  }
+  return accumulator;
 }
 
 Array.prototype.newFlat = function(depth = 1) {
