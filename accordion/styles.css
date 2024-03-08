@@ -1,0 +1,40 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+    width: 110vw;
+    height: 100vh;
+    /* background: #0f1418; */
+  }
+  
+  .accordionContainer {
+    width: 80%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    background-color: #15191e;
+    border-radius: 8px;
+  }
+  
+  .accordionItem {
+    width: "100%";
+    height: auto;
+    background: #222222;
+    border-bottom: 1px solid #414141;
+    color: #fff;
+    text-align: left;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .accordionTitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .accordionDesc {
+    margin-top: 10px;
+  }
+  

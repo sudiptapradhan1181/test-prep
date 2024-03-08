@@ -1,0 +1,27 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  .carouselContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: auto;
+  }
+  
+  .button {
+    height: 30px;
+    width: auto;
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  .imgStyle {
+    margin: 0 10px;
+    width: 500px;
+    height: 400px;
+    object-fit: contain;
+  }
+  
