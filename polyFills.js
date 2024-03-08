@@ -180,7 +180,7 @@ function promiseAllSettledPolyfill(tasksArray) {
         	"status": "fulfilled",
           "value" : data
         })
-        if(index === tasksArray.length - 1)
+        if(index === tasksArray.length - 1) //use total rather than index
         	resolve(output)
       })
       .catch((reason) => {
