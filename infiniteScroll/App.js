@@ -28,6 +28,16 @@ export default function App() {
     }
   };
 
+  /*scroll condition can also be
+  if (
+        window.innerHeight + window.scrollY >=
+        window.document.body.offsetHeight - 40
+      ) {
+        setCount(count + 50);
+      }
+
+  */
+
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop !==

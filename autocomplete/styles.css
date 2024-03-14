@@ -1,0 +1,18 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input {
+  width: 300px;
+}
+
+.suggestionList {
+  width: 300px;
+  height: auto;
+  background-color: azure;
+  cursor: pointer;
+}
