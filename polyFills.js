@@ -394,3 +394,22 @@ function lodashOnce (fn, context) {
 // hello("Sudo")
 // hello("Sudo1")
 // hello("Sudo2")
+
+
+//Code for compose
+
+function compose(...functions) {
+  return (args) => {
+    return functions.reduceRight((arg, fn) => fn(arg), args)
+  }
+}
+
+// function addFive (a) {
+//   return a + 5
+// }
+
+// function multiplyTen (a) {
+//   return a * 5
+// }
+
+// console.log(compose(addFive, multiplyTen)(5))
