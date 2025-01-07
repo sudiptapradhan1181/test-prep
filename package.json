@@ -1,0 +1,14 @@
+{
+    "name": "test-prep",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.html",
+    "scripts": {
+        "test": "jest --watchAll --noStackTrace"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "jest": "^27.5.1"
+    }
+}
