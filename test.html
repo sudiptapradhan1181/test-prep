@@ -1,0 +1,111 @@
+<html>
+  <head>
+    <title>Testing debounce</title>
+  </head>
+  <body>
+    <script>
+      function debouncePoly(fn, delay) {
+        let timer;
+        return function () {
+          let context = this;
+          let args = arguments;
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            fn.apply(this, args);
+          }, delay);
+        };
+      }
+
+      function throttlePoly(fn, delay) {
+        let flag = true;
+        return function () {
+          let context = this;
+          let args = arguments;
+          if (flag) {
+            flag = false;
+            fn.apply(context, args);
+            setTimeout(() => {
+              flag = true;
+            }, delay);
+          }
+        };
+      }
+
+      function logger(val) {
+        console.log(val);
+        console.log("calling this");
+      }
+
+      function promiseAll(promisesArr) {
+        let result = [],
+          total = 0;
+        return new Promise((resolve, reject) => {
+          promisesArr.forEach((promise, index) => {
+            promise
+              .then((res) => {
+                result[index] = res;
+                total++;
+
+                if (total == promisesArr.length) {
+                  resolve(result);
+                }
+              })
+              .catch((err) => reject(err));
+          });
+        });
+      }
+
+      function promiseRacePolyfill(tasksArray) {
+        return new Promise((resolve, reject) => {
+          tasksArray.forEach((promise, index) => {
+            promise
+              .then((data) => {
+                resolve(data);
+              })
+              .catch((err) => {
+                reject(err);
+              });
+          });
+        });
+      }
+
+      function clicker() {
+        console.log("clicking");
+        const promise1 = new Promise((resolve) => resolve(1));
+        const promise2 = new Promise((resolve, reject) => reject(2));
+        const promise3 = new Promise((resolve) => resolve(3));
+
+        const promiseArr = [promise2, promise1, promise3];
+
+        const res1 = Promise.race(promiseArr);
+        const res2 = promiseRacePolyfill(promiseArr); // why do they have different outputs?
+        console.log(res1);
+        console.log(res2);
+      }
+
+      const throttler = throttlePoly(clicker, 2000);
+      const debouncer = debouncePoly(logger, 2000);
+
+      var obj = {
+        x: "Sudipta",
+      };
+
+      function printer(age, gender) {
+        console.log(this.x, age, gender);
+      }
+
+      printBind = printer.bind(obj);
+      printBind(24, "M");
+    </script>
+    Test throttle
+
+    <!-- <button onclick="clicker()">Throttling on this</button> -->
+
+    <label for="inputBox">Type here:</label>
+    <input
+      placeholder="Enter some text"
+      name="name"
+      onkeyup="debouncer(this.value)"
+    />
+  </body>
+</html>
