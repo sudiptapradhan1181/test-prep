@@ -134,6 +134,8 @@ Function.prototype.newApply = function (context, args) {
   return result;
 };
 
+//Why the weird lines can be understood here -> https://chatgpt.com/s/t_68e9320515f08191867a2ffa1e1f836c
+
 Function.prototype.newBind = function (context, ...args1) {
   if (typeof this !== "function") {
     throw new Error("Bind can only be called on functions");
