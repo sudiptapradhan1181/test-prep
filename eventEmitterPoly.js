@@ -1,3 +1,4 @@
+//event emitter polyfill
 class EventEmitterPoly {
   eventMap = {}; // Event -> Set
 

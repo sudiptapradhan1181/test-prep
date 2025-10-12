@@ -1,3 +1,4 @@
+//debounce polyfill
 function debouncePoly(fn, delay) {
   let timer;
   return function () {
@@ -10,6 +11,7 @@ function debouncePoly(fn, delay) {
   };
 }
 
+//throttle poly
 function throttlePoly(fn, delay) {
   let flag = true;
   return function () {
@@ -25,6 +27,7 @@ function throttlePoly(fn, delay) {
   };
 }
 
+//Map polyfill
 Array.prototype.newMap = function (logic) {
   let result = [];
   this.forEach((element) => {
@@ -33,6 +36,7 @@ Array.prototype.newMap = function (logic) {
   return result;
 };
 
+//Filter polyfill
 Array.prototype.newFilter = function (logic) {
   let result = [];
   this.forEach((element) => {
@@ -41,6 +45,7 @@ Array.prototype.newFilter = function (logic) {
   return result;
 };
 
+//Reduce polyfill
 Array.prototype.newReduce = function (logic, acc) {
   var accumulator = acc;
   for (var i = 0; i < this.length; i++) {
@@ -53,6 +58,7 @@ Array.prototype.newReduce = function (logic, acc) {
   return accumulator;
 };
 
+//Flat polyfill
 Array.prototype.newFlat = function (depth = 1) {
   let result = [];
   if (depth <= 0) {
@@ -72,6 +78,7 @@ Array.prototype.newFlat = function (depth = 1) {
   return result;
 };
 
+//Splice polyfill
 Array.prototype.newSplice = function (startIndex, numItems) {
   let endIndex = startIndex + numItems;
 
@@ -100,6 +107,7 @@ Array.prototype.newSplice = function (startIndex, numItems) {
   return splicedItems;
 };
 
+//Call ployfill
 Function.prototype.newCall = function (context, ...args) {
   if (typeof this !== "function") {
     throw new Error("Function.prototype.newCall - not callable");
@@ -115,6 +123,7 @@ Function.prototype.newCall = function (context, ...args) {
   return result;
 };
 
+//Apply polyfill
 Function.prototype.newApply = function (context, args) {
   if (typeof this !== "function") {
     throw new Error("Function.prototype.newApply - not callable");
@@ -136,6 +145,7 @@ Function.prototype.newApply = function (context, args) {
 
 //Why the weird lines can be understood here -> https://chatgpt.com/s/t_68e9320515f08191867a2ffa1e1f836c
 
+//Bind polyfill
 Function.prototype.newBind = function (context, ...args1) {
   if (typeof this !== "function") {
     throw new Error("Bind can only be called on functions");
@@ -154,6 +164,7 @@ Function.prototype.newBind = function (context, ...args1) {
   };
 };
 
+//Promise all polyfill
 function promiseAllPolyfill(tasksArray) {
   let output = [];
   let total = 0;
@@ -172,6 +183,7 @@ function promiseAllPolyfill(tasksArray) {
   });
 }
 
+//Promise Race polyfill
 function promiseRacePolyfill(tasksArray) {
   return new Promise((resolve, reject) => {
     tasksArray.forEach((promise, index) => {
@@ -186,6 +198,7 @@ function promiseRacePolyfill(tasksArray) {
   });
 }
 
+//Promise All Settled Polyfill
 function promiseAllSettledPolyfill(tasksArray) {
   return new Promise((resolve, reject) => {
     let output = [];
@@ -211,6 +224,7 @@ function promiseAllSettledPolyfill(tasksArray) {
   });
 }
 
+//Promise Any Polyfill
 function promiseAnyPolyfill(tasksArray) {
   return new Promise((resolve, reject) => {
     let counter = 0;
@@ -227,6 +241,7 @@ function promiseAnyPolyfill(tasksArray) {
   });
 }
 
+//Promise Polyfill
 function promisePolyFill(executor) {
   let onResolve,
     onReject,
@@ -286,6 +301,7 @@ function promisePolyFill(executor) {
   }
 }
 
+//Array split polyfill
 String.prototype.newSplit = function (delimiter) {
   let result = [];
   let string = this;
@@ -308,6 +324,7 @@ String.prototype.newSplit = function (delimiter) {
   return result;
 };
 
+//Settimeout polyfill
 function createTimeoutFunctions() {
   let timerId = 1;
   let timerMap = {};
@@ -350,6 +367,7 @@ function createTimeoutFunctions() {
 
 // console.log("end")
 
+//Setinterval polyfill
 function createIntervalFunctions() {
   let intervalId = 1;
   let intervalMap = {};
