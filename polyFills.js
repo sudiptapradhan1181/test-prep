@@ -421,25 +421,92 @@ function lodashOnce(fn, context) {
   };
 }
 
-// const hello = lodashOnce((name) => {console.log('hello',name)})
-// hello("Sudo")
-// hello("Sudo1")
-// hello("Sudo2")
-
-//Code for compose
-
 function compose(...functions) {
   return (args) => {
     return functions.reduceRight((arg, fn) => fn(arg), args);
   };
 }
 
-// function addFive (a) {
-//   return a + 5
-// }
+//Function to check if 2 objects or arrays are deep copies
+function deepEqual(obj1, obj2) {
+  if (obj1 === obj2) return true;
 
-// function multiplyTen (a) {
-//   return a * 5
-// }
+  if (obj1 == null || obj2 == null) {
+    return false;
+  }
 
-// console.log(compose(addFive, multiplyTen)(5))
+  if (typeof obj1 !== "object" || typeof obj2 !== "object") {
+    return false;
+  }
+
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  if (Array.isArray(obj1) !== Array.isArray(obj2)) {
+    return false;
+  }
+
+  return keys1.every((key) => {
+    return deepEqual(obj1[key], obj2[key]);
+  });
+}
+
+//Polyfill for structuredClone
+function deepClone(param, seen = new WeakMap()) {
+  const result = Array.isArray(param) ? [] : {};
+
+  if (seen.has(param)) {
+    throw new Error("Cyclic dependency found");
+  }
+
+  Object.keys(param).forEach((key) => {
+    const data = param[key];
+    if (typeof data === "object") {
+      result[key] = deepClone(data, seen);
+    } else {
+      result[key] = param[key];
+    }
+  });
+
+  seen.set(param, true);
+  return result;
+}
+
+//Polyfill for ==
+function abstractEquality(a, b) {
+  if (typeof a === typeof b) return a === b;
+
+  if (a === null && b === undefined) return true;
+  if (a === undefined && b === null) return true;
+
+  if (typeof a === "object") return abstractEquality(String(a), b);
+  if (typeof b === "object") return abstractEquality(a, String(b));
+
+  return Number(a) === Number(b);
+}
+
+//Polyfill for new keyword
+function myNew(ConstructorFn, ...args) {
+  const newObj = {};
+
+  Object.setPrototypeOf(newObj, ConstructorFn.prototype);
+
+  const result = ConstructorFn.apply(newObj, args);
+
+  return result instanceof Object ? result : newObj;
+}
+
+//Polyfill for Object.create
+Object.prototype.newCreate = function (parentObj, keysObj) {
+  const newObj = {};
+
+  Object.setPrototypeOf(newObj, parentObj);
+
+  Object.defineProperties(newObj, keysObj);
+
+  return newObj;
+};
